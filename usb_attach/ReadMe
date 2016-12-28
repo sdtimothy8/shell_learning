@@ -1,0 +1,27 @@
+测试环境：物理主机是redhat6.2，虚拟机操作系统为XP
+
+首先在物理机插入U盘，待物理机识别到U盘后执行lsusb，找到相应设备的ID号，例如：
+
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 007 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 008 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 003 Device 002: ID 03f0:0024 Hewlett-Packard KU-0316 Keyboard
+Bus 002 Device 009: ID 0951:1642 Kingston Technology 
+
+最后一行 0951:1642 就是U盘的ID号
+
+编写usb.xml文件，内容如下：
+
+<hostdev mode=’subsystem’ type=’usb’>
+	<source>
+		<vendor id=’0x0951’/>
+		<product id=’0×1642′/>
+	</source>
+</hostdev>
+
+然后给虚拟机挂载U盘，命令：virsh attach-device winXP usb.xml
