@@ -1,0 +1,7 @@
+#!/bin/bash -f
+
+function mygrep() {
+	grep -niI --color=auto "$1" -r --exclude="*.swp" --exclude="*.a" --exclude=Binary  --exclude-dir="\.git" --exclude-dir="\.svn" 
+}
+
+mygrep $1
